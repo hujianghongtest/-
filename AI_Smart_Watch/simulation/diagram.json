@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "author": "AI Smart Watch - Hardware Verification",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-s3-devkitc-1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-ili9341",
+      "id": "lcd",
+      "top": -250,
+      "left": 380,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": 120,
+      "left": -200,
+      "attrs": {
+        "temperature": "25",
+        "humidity": "55"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_up",
+      "top": -80,
+      "left": 450,
+      "attrs": {
+        "color": "green",
+        "label": "UP"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_down",
+      "top": 0,
+      "left": 450,
+      "attrs": {
+        "color": "blue",
+        "label": "DOWN"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_ok",
+      "top": 80,
+      "left": 450,
+      "attrs": {
+        "color": "red",
+        "label": "OK"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_dht",
+      "top": 60,
+      "left": -100,
+      "attrs": {
+        "resistance": "10000"
+      }
+    }
+  ],
+  "connections": [
+    ["esp:TX0", "$serialMonitor:RX", "", []],
+    ["esp:RX0", "$serialMonitor:TX", "", []],
+
+    ["lcd:VCC", "esp:3V3", "red", []],
+    ["lcd:GND", "esp:GND.1", "black", []],
+    ["lcd:CS", "esp:10", "orange", []],
+    ["lcd:RST", "esp:14", "cyan", []],
+    ["lcd:D/C", "esp:13", "yellow", []],
+    ["lcd:MOSI", "esp:11", "purple", []],
+    ["lcd:SCK", "esp:12", "green", []],
+    ["lcd:LED", "esp:47", "white", []],
+
+    ["dht1:VCC", "esp:3V3", "red", []],
+    ["dht1:GND", "esp:GND.2", "black", []],
+    ["dht1:SDA", "esp:17", "blue", []],
+    ["r_dht:1", "esp:3V3", "red", []],
+    ["r_dht:2", "esp:17", "red", []],
+
+    ["btn_up:1.r", "esp:1", "green", []],
+    ["btn_up:2.l", "esp:GND.3", "black", []],
+
+    ["btn_down:1.r", "esp:3", "blue", []],
+    ["btn_down:2.l", "esp:GND.4", "black", []],
+
+    ["btn_ok:1.r", "esp:5", "red", []],
+    ["btn_ok:2.l", "esp:GND.5", "black", []]
+  ],
+  "serialMonitor": {
+    "display": "terminal",
+    "newline": "lf"
+  }
+}
