@@ -1,0 +1,64 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  ESP-IDF SDK 默认配置                                       ║
+# ║  精简配置: 仅启用手表项目需要的 ESP-IDF 组件                  ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+# --- CPU 频率 ---
+# 240MHz: ESP32-S3 最高频率, WiFi 稳定工作的推荐值
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ=240
+
+# --- Flash 配置 ---
+# ESP32-S3-Zero: 16MB QIO Flash
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+CONFIG_ESPTOOLPY_FLASHFREQ_80M=y
+
+# --- 主任务栈大小 ---
+# 默认 3584 字节，增加以支持复杂 UI 和网络栈
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+
+# --- FreeRTOS ---
+# 系统心跳 1000Hz (1ms 精度，适合非阻塞定时)
+CONFIG_FREERTOS_HZ=1000
+
+# --- I2C 驱动 (BME280 + DS3231) ---
+CONFIG_I2C_MASTER_ENABLE=y
+CONFIG_I2C_MASTER_FREQ_HZ=100000
+
+# --- SPI 驱动 (TFT 显示屏) ---
+CONFIG_SPI_MASTER_ENABLE=y
+CONFIG_SPI_MASTER_FREQ_HZ=40000000
+
+# --- I2S 驱动 (INMP441 + MAX98357) ---
+CONFIG_I2S_ENABLE=y
+
+# --- WiFi ---
+CONFIG_ESP_WIFI_ENABLED=y
+CONFIG_ESP_WIFI_STATIC_RX_BUFFER_NUM=16
+CONFIG_ESP_WIFI_DYNAMIC_RX_BUFFER_NUM=64
+CONFIG_ESP_WIFI_STATIC_TX_BUFFER_NUM=16
+CONFIG_ESP_WIFI_DYNAMIC_TX_BUFFER_NUM=64
+# WiFi 省电模式: 自动 (有数据时唤醒)
+CONFIG_ESP_WIFI_PS_AUTO=y
+
+# --- HTTP 客户端 (AI API 通信) ---
+CONFIG_ESP_HTTP_CLIENT_ENABLE=y
+
+# --- NVS (WiFi 凭证存储) ---
+CONFIG_NVS_ENABLED=y
+
+# --- 日志级别: Warning (减少串口输出, 节省 CPU) ---
+CONFIG_LOG_DEFAULT_LEVEL_WARN=y
+CONFIG_LOG_MAXIMUM_LEVEL_WARN=y
+
+# --- 分区表 ---
+# 使用自定义分区 (大固件 4MB + NVS + OTA)
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# --- 关闭不需要的组件以减小固件体积 ---
+CONFIG_ESP_RMAKER_ENABLED=n
+CONFIG_ESP_ADF_ENABLED=n
+CONFIG_BT_ENABLED=n
+CONFIG_BTDM_CTRL_MODE_BLE_ONLY=n
