@@ -1,6 +1,0 @@
-[wokwi]
-version = 1
-
-[wokwi.firmware]
-# Use the Arduino sketch for simulation
-source = "main.ino"
